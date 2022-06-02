@@ -35,7 +35,7 @@ import static org.yamcs.xtce.XtceDb.YAMCS_SPACESYSTEM_NAME;
 import org.yaml.snakeyaml.Yaml;
 import org.yamcs.xtce.Parameter;
 import org.yamcs.xtce.XtceDb;
-import org.yamcs.xtceproc.XtceDbFactory;
+import org.yamcs.mdb.XtceDbFactory;
 
 
 public class RegistryService extends AbstractYamcsService implements SystemParametersProducer {
