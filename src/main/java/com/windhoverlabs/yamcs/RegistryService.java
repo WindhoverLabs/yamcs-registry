@@ -21,6 +21,7 @@ import org.yamcs.YConfiguration;
 import org.yamcs.YamcsServer;
 import org.yamcs.events.EventProducer;
 import org.yamcs.events.EventProducerFactory;
+import org.yamcs.mdb.Mdb;
 import org.yamcs.mdb.XtceDbFactory;
 import org.yamcs.parameter.ParameterValue;
 import org.yamcs.parameter.SystemParametersProducer;
@@ -89,35 +90,35 @@ public class RegistryService extends AbstractYamcsService implements SystemParam
           processMapFlat(newPath + "/", (Map<String, Object>) data.get(key));
         } else if (data.get(key).getClass() == java.lang.Integer.class) {
           Parameter param =
-              xtceDb.createSystemParameter(newPath, sysParamService.getBasicType(Type.DOUBLE), "");
+              ((Mdb) xtceDb).createSystemParameter(newPath, sysParamService.getBasicType(Type.DOUBLE), "");
           ParameterValue pv = new ParameterValue(param);
           pv.setGenerationTime(gentime);
           pv.setDoubleValue(((java.lang.Integer) data.get(key)).intValue());
           this.pvlist.add(pv);
         } else if (data.get(key).getClass() == java.lang.String.class) {
           Parameter param =
-              xtceDb.createSystemParameter(newPath, sysParamService.getBasicType(Type.STRING), "");
+              ((Mdb) xtceDb).createSystemParameter(newPath, sysParamService.getBasicType(Type.STRING), "");
           ParameterValue pv = new ParameterValue(param);
           pv.setGenerationTime(gentime);
           pv.setStringValue((String) data.get(key));
           this.pvlist.add(pv);
         } else if (data.get(key).getClass() == java.lang.Boolean.class) {
           Parameter param =
-              xtceDb.createSystemParameter(newPath, sysParamService.getBasicType(Type.BOOLEAN), "");
+              ((Mdb) xtceDb).createSystemParameter(newPath, sysParamService.getBasicType(Type.BOOLEAN), "");
           ParameterValue pv = new ParameterValue(param);
           pv.setGenerationTime(gentime);
           pv.setBooleanValue(((java.lang.Boolean) data.get(key)).booleanValue());
           this.pvlist.add(pv);
         } else if (data.get(key).getClass() == java.lang.Long.class) {
           Parameter param =
-              xtceDb.createSystemParameter(newPath, sysParamService.getBasicType(Type.DOUBLE), "");
+              ((Mdb) xtceDb).createSystemParameter(newPath, sysParamService.getBasicType(Type.DOUBLE), "");
           ParameterValue pv = new ParameterValue(param);
           pv.setGenerationTime(gentime);
           pv.setDoubleValue(((java.lang.Long) data.get(key)).longValue());
           this.pvlist.add(pv);
         } else if (data.get(key).getClass() == java.lang.Double.class) {
           Parameter param =
-              xtceDb.createSystemParameter(newPath, sysParamService.getBasicType(Type.DOUBLE), "");
+              ((Mdb) xtceDb).createSystemParameter(newPath, sysParamService.getBasicType(Type.DOUBLE), "");
           ParameterValue pv = new ParameterValue(param);
           pv.setGenerationTime(gentime);
           pv.setDoubleValue(((java.lang.Double) data.get(key)).doubleValue());
@@ -166,7 +167,7 @@ public class RegistryService extends AbstractYamcsService implements SystemParam
     }
   }
 
-  public Collection<org.yamcs.parameter.ParameterValue> getSystemParameters() {
+  public Collection<org.yamcs.parameter.ParameterValue> getSystemParameters(long gentime) {
     if (paramsCollected == false) {
       paramsCollected = true;
       return pvlist;
